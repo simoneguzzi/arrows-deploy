@@ -1,0 +1,21 @@
+services:
+  arrows:
+    restart: unless-stopped
+    image: ghcr.io/simoneguzzi/arrows.app:latest
+    expose:
+      - "4200"
+    labels:
+      - "traefik.http.routers.arrows.rule=PathPrefix(`/`)"
+
+  gen-pydantic:
+    restart: unless-stopped
+    image: ghcr.io/simoneguzzi/gen-pydantic:latest
+    expose:
+      - "8000"
+
+  traefik:
+    restart: unless-stopped
+    image: docker.io/library/traefik:v3.1.0
+    command: --providers.docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
