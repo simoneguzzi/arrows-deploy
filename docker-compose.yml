@@ -12,6 +12,8 @@ services:
     image: ghcr.io/simoneguzzi/gen-pydantic:latest
     expose:
       - "8000"
+    labels:
+      - "traefik.http.routers.gen-pydantic.rule=PathPrefix(`/gen-pydantic`)"
 
   traefik:
     restart: unless-stopped
