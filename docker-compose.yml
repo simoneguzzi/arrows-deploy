@@ -6,6 +6,8 @@ services:
       - "4200"
     labels:
       - "traefik.http.routers.arrows.rule=PathPrefix(`/`)"
+    volumes:
+      - ./services/arrows/.env:/app/apps/arrows-ts/.env
 
   gen-pydantic:
     restart: unless-stopped
