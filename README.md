@@ -1,7 +1,7 @@
 # Arrows deploy
 
-## Local deployment
+## Local HTTP deployment
 
 ```shell
-docker compose -f docker-compose.yml -f docker-compose.local.yml up --build
+docker compose -f docker-compose.yml -f docker-compose.local-prod.yml up --build
 ```
