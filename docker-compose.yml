@@ -1,7 +1,7 @@
 services:
   arrows:
     restart: unless-stopped
-    image: ghcr.io/simoneguzzi/arrows.app:latest
+    image: ghcr.io/simoneguzzi/arrows.app:0.1.0
     expose:
       - "4200"
     labels:
