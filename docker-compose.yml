@@ -11,7 +11,7 @@ services:
 
   gen-pydantic:
     restart: unless-stopped
-    image: ghcr.io/simoneguzzi/gen-pydantic:latest
+    image: ghcr.io/simoneguzzi/gen-pydantic:0.0.0
     expose:
       - "8000"
     labels:
