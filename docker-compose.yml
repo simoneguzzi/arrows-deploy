@@ -11,11 +11,12 @@ services:
 
   gen-pydantic:
     restart: unless-stopped
-    image: ghcr.io/simoneguzzi/gen-pydantic:0.0.0
+    image: ghcr.io/simoneguzzi/gen-pydantic:0.1.0
     expose:
       - "8000"
     labels:
       - "traefik.http.routers.gen-pydantic.rule=PathPrefix(`/gen-pydantic`)"
+      - "traefik.http.routers.gen-pydantic.rule=PathPrefix(`/validate-linkml`)"
 
   traefik:
     restart: unless-stopped
