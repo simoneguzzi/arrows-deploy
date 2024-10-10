@@ -4,8 +4,6 @@ services:
     image: ghcr.io/simoneguzzi/arrows.app:0.4.0
     expose:
       - "4200"
-    labels:
-      - "traefik.http.routers.arrows.rule=PathPrefix(`/`)"
     volumes:
       - ./services/arrows/.env:/app/apps/arrows-ts/.env
 
@@ -14,12 +12,3 @@ services:
     image: ghcr.io/simoneguzzi/gen-pydantic:0.2.0
     expose:
       - "8000"
-    labels:
-      - "traefik.http.routers.gen-pydantic.rule=PathPrefix(`/api`)"
-
-  traefik:
-    restart: unless-stopped
-    image: docker.io/library/traefik:v3.1.0
-    command: --providers.docker
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock

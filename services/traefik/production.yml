@@ -1,0 +1,33 @@
+services:
+  traefik:
+    restart: unless-stopped
+    image: docker.io/library/traefik:v3.1.0
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - letsencrypt:/letsencrypt
+    ports:
+      - "80:80"
+      - "443:443"
+    command: >
+      --providers.docker
+      --entryPoints.webinsecure.address=:80
+      --entryPoints.web.address=:443
+      --entryPoints.web.http.tls.certresolver="myresolver"
+      --certificatesresolvers.myresolver.acme.email=simone.guzzi@studenti.unimi.it
+      --certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json
+      --certificatesresolvers.myresolver.acme.tlschallenge=true
+
+  arrows:
+    labels:
+      - "traefik.http.routers.arrows.rule=Host(`fl-14-97.zhdk.cloud.switch.ch`) && PathPrefix(`/`)"
+      - "traefik.http.routers.arrows.tls=true"
+      - "traefik.http.routers.arrows.tls.certresolver=myresolver"
+
+  gen-pydantic:
+    labels:
+      - "traefik.http.routers.gen-pydantic.rule=Host(`fl-14-97.zhdk.cloud.switch.ch`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.gen-pydantic.tls=true"
+      - "traefik.http.routers.gen-pydantic.tls.certresolver=myresolver"
+
+volumes:
+  letsencrypt:
