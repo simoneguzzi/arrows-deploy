@@ -1,0 +1,20 @@
+services:
+  traefik:
+    ports:
+      - "80:80"
+      - "8080:8080"
+    restart: unless-stopped
+    image: docker.io/library/traefik:v3.1.0
+    command: >
+      --providers.docker
+      --api.insecure=true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  arrows:
+    labels:
+      - "traefik.http.routers.arrows.rule=PathPrefix(`/`)"
+
+  gen-pydantic:
+    labels:
+      - "traefik.http.routers.gen-pydantic.rule=PathPrefix(`/api`)"
