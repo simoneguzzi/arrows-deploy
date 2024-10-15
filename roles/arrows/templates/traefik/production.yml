@@ -19,13 +19,13 @@ services:
 
   arrows:
     labels:
-      - "traefik.http.routers.arrows.rule=Host(`fl-14-97.zhdk.cloud.switch.ch`) && PathPrefix(`/`)"
+      - "traefik.http.routers.arrows.rule=Host(`{{ ansible_host }}`) && PathPrefix(`/`)"
       - "traefik.http.routers.arrows.tls=true"
       - "traefik.http.routers.arrows.tls.certresolver=myresolver"
 
   gen-pydantic:
     labels:
-      - "traefik.http.routers.gen-pydantic.rule=Host(`fl-14-97.zhdk.cloud.switch.ch`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.gen-pydantic.rule=Host(`{{ ansible_host }}`) && PathPrefix(`/api`)"
       - "traefik.http.routers.gen-pydantic.tls=true"
       - "traefik.http.routers.gen-pydantic.tls.certresolver=myresolver"
 

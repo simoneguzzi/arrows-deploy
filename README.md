@@ -1,21 +1,21 @@
 # Arrows deploy
 
-⚠️ Only use the secure HTTPs deployment for your production instance ⚠️
+## Deploy remotely using Ansible
 
-## Deploy without reverse proxy
+Requirements:
+
+- Ansible installed on your local machine
+- SSH access to the remote machine
+- Docker installed on the remote machine
+
+Dry run:
 
 ```shell
-docker compose -f docker-compose.yml up
+ansible-playbook -i inventory deploy.yml --check
 ```
 
-## Deploy with test HTTP reverse proxy
+Run:
 
 ```shell
-docker compose -f docker-compose.yml -f services/traefik/test.yml up
-```
-
-## Deploy with production HTTPs reverse proxy
-
-```shell
-docker compose -f docker-compose.yml -f services/traefik/production.yml up
+ansible-playbook -i inventory deploy.yml
 ```

@@ -2,10 +2,11 @@ services:
   arrows:
     restart: unless-stopped
     image: ghcr.io/simoneguzzi/arrows.app:0.4.0
+    environment:
+      VITE_GEN_PYDANTIC_ENDPOINT: "https://{{ ansible_host }}/api/gen-pydantic/"
+      VITE_VALIDATE_LINKML_ENDPOINT: "https://{{ ansible_host }}/api/validate-linkml/"
     expose:
       - "4200"
-    volumes:
-      - ./services/arrows/.env:/app/apps/arrows-ts/.env
 
   gen-pydantic:
     restart: unless-stopped

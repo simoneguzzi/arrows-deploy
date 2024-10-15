@@ -1,0 +1,27 @@
+- name: Add user to the docker group
+  become: true
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: yes
+
+- name: Reset connection to make user permission changes effective
+  ansible.builtin.meta: reset_connection
+
+- name: Copy compose files
+  ansible.builtin.template:
+    src: "{{ item }}"
+    dest: "{{ service_path }}"
+    mode: 0400
+  loop:
+    - "docker/docker-compose.yml"
+    - "traefik/production.yml"
+
+- name: Run compose project
+  ansible.builtin.command: >-
+    docker compose
+    -f docker-compose.yml
+    -f production.yml
+    up -d
+  args:
+    chdir: "{{ service_path }}"

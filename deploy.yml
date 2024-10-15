@@ -1,0 +1,5 @@
+---
+- name: Deploy Arrows
+  hosts: all
+  roles:
+    - role: arrows
