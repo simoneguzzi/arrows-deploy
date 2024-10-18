@@ -11,7 +11,7 @@ services:
 
   gen-pydantic:
     restart: unless-stopped
-    image: ghcr.io/simoneguzzi/gen-pydantic:0.3.0
+    image: ghcr.io/simoneguzzi/gen-pydantic:0.3.1
     environment:
       OPENAI_API_KEY: "{{ openai_api_key }}"
       OPENAI_THREAD_ID: "{{ openai_thread_id }}"
